@@ -7,7 +7,7 @@
   <h1>Hello world.</h1>
   <ul>
     <li><a href="http://west.ss.osaka-kyoiku.ac.jp/mysite/">mysite</a></li>
-    <li><a href="http://west.ss.osaka-kyoiku.ac.jp/video/">OKUV</a></li>
+    <!--<li><a href="http://west.ss.osaka-kyoiku.ac.jp/video/">OKUV</a></li>-->
   </ul>
 </body>
 </html>
