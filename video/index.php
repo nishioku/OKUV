@@ -19,16 +19,19 @@ mysql_query($sqlSession) or die(mysql_error());
 if (isset($_GET['serch'])) {
   $serchKeyword = htmlspecialchars($_GET['serch']);
 }
+//
 //タグ検索
 if (isset($_POST['serchTag'])) {
   $serchTag = htmlspecialchars($_POST['serchTag']);
 }
+//
 //表示順
 if (isset($_POST['order'])) {
   $order = htmlspecialchars($_POST['order']);
 } else {
   $order = 0;
 }
+//
 //ページ情報
 if (isset($_GET['page'])) {
   $currentPage = htmlspecialchars($_GET['page']);
@@ -36,6 +39,7 @@ if (isset($_GET['page'])) {
   header('Location: index.php?page=1');
   exit();
 }
+//
 
 
 /*
@@ -106,6 +110,8 @@ $sqlVideoget = 'select * from video';
   $sqlVideoget = $sqlVideoget . " limit " . $startCount . "," . $maxCount;
   $setVideoget = mysql_query($sqlVideoget) or die(mysql_error());
 ?>
+
+
 
 <html>
   <head>

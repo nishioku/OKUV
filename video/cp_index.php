@@ -16,8 +16,8 @@ mysql_query($sqlSession) or die(mysql_error());
   各種変数を設定
 */
 //キーワード検索
-if (isset($_GET['serch'])) {
-  $serchKeyword = htmlspecialchars($_GET['serch']);
+if (isset($_POST['serchKeyword'])) {
+  $serchKeyword = htmlspecialchars($_POST['serchKeyword']);
 }
 //タグ検索
 if (isset($_POST['serchTag'])) {
@@ -46,9 +46,9 @@ $sqlVideoget = 'select * from video';
     キーワード検索
   */
   if (isset($serchKeyword)) {
-    $sqlSerchKeyword = ' where title like "%' . $serchKeyword . '%"';
+    $sqlSerchKeyword = ' where title like '%" . $serchKeyword . "%'';
     $sqlVideoget = $sqlVideoget . $sqlSerchKeyword;
-    $sqlSKCount = 'select count(*) as count from video where title like "%' . $serchKeyword . '%"';
+    $sqlSKCount = 'select count(*) as count from video where title regexp \'^(' . $serchKeyword . ')\'';
     $setSKCount = mysql_query($sqlSKCount) or die(mysql_error());
     $valSKCount = mysql_fetch_assoc($setSKCount);
   }
@@ -84,9 +84,9 @@ $sqlVideoget = 'select * from video';
     ページ情報設定
   */
   if (isset($serchKeyword)) {
-    $videoCount = $valSKCount['count'];
+    $videoCount = $valSKcount['count'];
   } else if (isset($serchTag)) {
-    $videoCount = $valSTCount['count'];
+    $videoCount = $valSTcount['count'];
   } else {
     $sqlCountget = 'select count(*) as count from video';
     $setCountget = mysql_query($sqlCountget) or die(mysql_error());
@@ -94,7 +94,7 @@ $sqlVideoget = 'select * from video';
     $videoCount = $valCountget['count'];
   }
 
-  $maxCount = 30;
+  $maxCount = 24;
    if ($videoCount < $maxCount) {
     $maxCount = $videoCount;
    }
@@ -103,6 +103,7 @@ $sqlVideoget = 'select * from video';
   $currentPage = max($currentPage, 1);
   $currentPage = min($currentPage, $maxPage);
   $startCount = ($currentPage - 1) * $maxCount;
+
   $sqlVideoget = $sqlVideoget . " limit " . $startCount . "," . $maxCount;
   $setVideoget = mysql_query($sqlVideoget) or die(mysql_error());
 ?>
@@ -131,13 +132,13 @@ $sqlVideoget = 'select * from video';
               <option value="1">キーワード</option>
               <option value="2">タグ</option>
             </select>
-            <input type="submit" name="Submit" value="検索">
+            <input type="submit" namei="Submit" value="検索">
           </div>
         </form>
       </li>
     </ul>
   </div>
-  <div id="index">
+  <div id="main">
     <div id="header2">
       <p><a href="index.php"><img src="./okuvlogo.png"></a></p>
     </div>
@@ -177,10 +178,7 @@ $sqlVideoget = 'select * from video';
           <a href="player.php?vid=<?php echo $valVideoget['v_id']; ?>" >
             <table class="video">
               <tr class="video_top">
-                <td class="video_top">
-                  <p style="float: left;">No.<?php echo $valVideoget['v_id']; ?></p>
-                  <?php if ($valVideoget['multi'] == 1) { ?><p style="float: right; font-weight: bold; color: red;">マルチ</p><?php } ?>
-                </td>
+                <td class="video_top"><p>No.<?php echo $valVideoget['v_id']; ?></p></td>
               </tr>
               <tr class="video_column1">
                 <td class="video_column1"><p><img src="<?php print('../outputTumb/' . $valVideoget['sam']); ?>" width=160 height=90 /></p></td>
