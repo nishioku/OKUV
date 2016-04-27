@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 require('dbconnect.php');
 
@@ -230,4 +231,17 @@ $sqlVideoget = 'select * from video';
       </div>
     </div>
   </body>
+=======
+<html>
+<head>
+<title>test of git</title>
+</head>
+
+<body>
+<h1>test of git</h1>
+<p>This site is a test-site of git.</p>
+<a href="150.86.66.51/video">video</a>
+</body>
+
+>>>>>>> 4f871a48a476a0306b0851f595f4df5c1a441644
 </html>
