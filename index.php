@@ -1,6 +1,6 @@
 <?php
 require('dbconnect.php');
-/*git*/
+/*git centos*/
 /*
   session更新
 */
