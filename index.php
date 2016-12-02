@@ -1,5 +1,6 @@
 <?php
 require('dbconnect.php');
+/*20161202*/
 /*git mac*/
 /*
   session更新
